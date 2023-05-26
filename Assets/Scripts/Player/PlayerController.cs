@@ -2,11 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace PlayerScripts
 {
-
-
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private float moveSpeed;
@@ -17,15 +16,24 @@ namespace PlayerScripts
         private Rigidbody2D _playerRigidbody;
 
         public delegate void PlayerEvent(float moveX, float moveY);
+        public delegate void PlayerAttackEvent(InputAction.CallbackContext context);
         public delegate void MouseMoveEvent(bool flipX);
+
 
         public static event PlayerEvent OnPlayerMoveEvent;
         public static event MouseMoveEvent OnMouseMoveEvent;
+        public static event PlayerAttackEvent OnPlayerAttackEvent;
         
         private void Awake()
         {
             _playerControls = new PlayerControls();
             _playerRigidbody = GetComponent<Rigidbody2D>();
+        }
+        
+        private void OnEnable()
+        {
+            _playerControls.Enable();
+            _playerControls.Attack.PrimaryAttack.started += HandlePrimaryAttack;
         }
 
         private void Update()
@@ -62,16 +70,9 @@ namespace PlayerScripts
             OnPlayerMoveEvent?.Invoke(_movementDirection.x, _movementDirection.y);
         }
 
-        private void AdjustPlayerFacingDirection()
+        private void HandlePrimaryAttack(InputAction.CallbackContext context)
         {
-            var mousePosition = _playerControls.MousePosition.MousePosition.ReadValue<Vector2>();
-            
+            OnPlayerAttackEvent?.Invoke(context);
         }
-
-        private void OnEnable()
-        {
-            _playerControls.Enable();
-        }
-
     }
 }
