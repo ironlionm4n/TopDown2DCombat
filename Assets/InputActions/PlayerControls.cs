@@ -149,6 +149,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""MousePosition"",
+            ""id"": ""e0925e76-ea5f-427f-a3fb-e6b9f6d7310e"",
+            ""actions"": [
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""f3b6d0bd-50dd-41f9-8cee-e32ca8cac6cd"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2f067e31-daa7-4d64-ae2c-9e14e78679bb"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -156,6 +184,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Movement
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
+        // MousePosition
+        m_MousePosition = asset.FindActionMap("MousePosition", throwIfNotFound: true);
+        m_MousePosition_MousePosition = m_MousePosition.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -259,8 +290,58 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public MovementActions @Movement => new MovementActions(this);
+
+    // MousePosition
+    private readonly InputActionMap m_MousePosition;
+    private List<IMousePositionActions> m_MousePositionActionsCallbackInterfaces = new List<IMousePositionActions>();
+    private readonly InputAction m_MousePosition_MousePosition;
+    public struct MousePositionActions
+    {
+        private @PlayerControls m_Wrapper;
+        public MousePositionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MousePosition => m_Wrapper.m_MousePosition_MousePosition;
+        public InputActionMap Get() { return m_Wrapper.m_MousePosition; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MousePositionActions set) { return set.Get(); }
+        public void AddCallbacks(IMousePositionActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MousePositionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MousePositionActionsCallbackInterfaces.Add(instance);
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
+        }
+
+        private void UnregisterCallbacks(IMousePositionActions instance)
+        {
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
+        }
+
+        public void RemoveCallbacks(IMousePositionActions instance)
+        {
+            if (m_Wrapper.m_MousePositionActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMousePositionActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MousePositionActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MousePositionActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MousePositionActions @MousePosition => new MousePositionActions(this);
     public interface IMovementActions
     {
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IMousePositionActions
+    {
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }
