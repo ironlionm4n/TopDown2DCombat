@@ -16,7 +16,7 @@ namespace PlayerScripts
         private Rigidbody2D _playerRigidbody;
 
         public delegate void PlayerEvent(float moveX, float moveY);
-        public delegate void PlayerAttackEvent(InputAction.CallbackContext context);
+        public delegate void PlayerAttackEvent(InputAction.CallbackContext context, Transform playerTransform);
         public delegate void MouseMoveEvent(bool flipX);
         public delegate void MouseMoveEventWithDirection(bool flipX, float moveX, float moveY);
 
@@ -36,6 +36,19 @@ namespace PlayerScripts
         {
             _playerControls.Enable();
             _playerControls.Attack.PrimaryAttack.started += HandlePrimaryAttack;
+            EnemyHealth.OnEnemyDeath += HandleEnemyKilled;
+        }
+
+        private void OnDisable()
+        {
+            _playerControls.Attack.PrimaryAttack.started -= HandlePrimaryAttack;
+            EnemyHealth.OnEnemyDeath -= HandleEnemyKilled;
+            _playerControls.Disable();
+        }
+
+        private void HandleEnemyKilled(EnemyHealth enemyhealth)
+        {
+            Debug.Log($"Enemy Just Killed: {enemyhealth.name}");
         }
 
         private void Update()
@@ -76,7 +89,7 @@ namespace PlayerScripts
 
         private void HandlePrimaryAttack(InputAction.CallbackContext context)
         {
-            OnPlayerAttackEvent?.Invoke(context);
+            OnPlayerAttackEvent?.Invoke(context, transform);
         }
     }
 }

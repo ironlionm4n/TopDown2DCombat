@@ -1,27 +1,38 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPathfinding : MonoBehaviour
 {
+    private bool shouldMove { get; set; } = true;
+    
     [SerializeField] private float moveSpeed;
     
-    private Rigidbody2D _slimeRigidbody;
+    private Rigidbody2D _enemyRigidbody2D;
     private Vector2 _moveDirection;
 
     private void Awake()
     {
-        _slimeRigidbody = GetComponent<Rigidbody2D>();
+        _enemyRigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        _slimeRigidbody.MovePosition(_slimeRigidbody.position + _moveDirection * (moveSpeed * Time.deltaTime));
+        if (shouldMove)
+        {
+            _enemyRigidbody2D.MovePosition(_enemyRigidbody2D.position + _moveDirection * (moveSpeed * Time.deltaTime));
+        }
     }
 
     public void SetMoveDirection(Vector2 moveDirection)
     {
         _moveDirection = moveDirection;
+    }
+
+    public void SetShouldMove(bool shouldMove)
+    {
+        if (!shouldMove)
+        {
+            _enemyRigidbody2D.velocity = Vector2.zero;
+        }
+        this.shouldMove = shouldMove;
     }
 }
