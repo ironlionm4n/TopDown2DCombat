@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 304ea4e2e5524e91b6ae909f866432e3, type: 3}
   m_Name: SimpleSlime
   m_EditorClassIdentifier: 
-  startingHealth: 5
+  startingHealth: 2

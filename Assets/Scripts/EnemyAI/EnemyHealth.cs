@@ -9,6 +9,7 @@ using Weapons;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private EnemyScriptableObject enemyScriptableObject;
+    [SerializeField] private GameObject deathParticleSystem;
     [SerializeField] private float hitDelayMovementTime;
     [SerializeField] private Material damageMaterial;
     [SerializeField] private float hitFlashTime;
@@ -43,8 +44,18 @@ public class EnemyHealth : MonoBehaviour
         DamageClass.OnEnemyWasHitWithDamage += HandleTakeDamage;
     }
 
-    private void HandleTakeDamage(PlayerWeaponScriptableObjects weaponSO)
+    private void OnDisable()
     {
+        PlayerController.OnPlayerAttackEvent -= HandleOnPlayerAttack;
+        DamageClass.OnEnemyWasHitWithDamage -= HandleTakeDamage;
+    }
+
+    private void HandleTakeDamage(PlayerWeaponScriptableObjects weaponSO, EnemyHealth enemyHealth)
+    {
+        if (enemyHealth.gameObject != gameObject)
+        {
+            return;
+        }
         TakeDamage(weaponSO);
     }
 
@@ -55,6 +66,8 @@ public class EnemyHealth : MonoBehaviour
 
     private void TakeDamage(PlayerWeaponScriptableObjects weaponSO)
     {
+
+        
         _enemyPathfinding.SetShouldMove(false);
         _currentHealth -= weaponSO.WeaponDamage;
         StartCoroutine(FlashDamageSpriteColor());
@@ -72,7 +85,6 @@ public class EnemyHealth : MonoBehaviour
         yield return new WaitForSeconds(hitFlashTime);
         if (_currentHealth <= 0)
         {
-            OnEnemyDeath?.Invoke(this);
             DestroySelf();
         }
         else
@@ -89,6 +101,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void DestroySelf()
     {
+        Instantiate(deathParticleSystem, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

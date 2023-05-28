@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "54dcd942-6682-4a32-a129-a086df12094c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -125,6 +134,28 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "7a238a49-b638-4698-962c-d2ccfa3d289a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b2448a7-3eb7-45d1-82f7-e15417d020ac",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -173,8 +204,8 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "6c5b9836-0fc2-4dda-bef4-c9a3b0b855f7",
-                    "path": "<Keyboard>/space",
+                    "id": "bd893216-d84d-4f02-8447-f20158e6e829",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -184,8 +215,8 @@
                 },
                 {
                     "name": "",
-                    "id": "bd893216-d84d-4f02-8447-f20158e6e829",
-                    "path": "<Mouse>/leftButton",
+                    "id": "e13269fe-2c99-4f96-8455-4cbb109d495d",
+                    "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
