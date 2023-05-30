@@ -1,10 +1,11 @@
 using System.Collections;
+using MISC;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace PlayerScripts
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Singleton<PlayerController>
     {
         [SerializeField] private float moveSpeed;
         [SerializeField] private float dashMultiplier;
@@ -19,7 +20,7 @@ namespace PlayerScripts
         private bool _isDashing;
         private bool _canDash = true;
         private float _defaultMoveSpeed, _dashMoveSpeed;
-        
+
 
         public delegate void PlayerEvent(float moveX, float moveY);
 
@@ -38,8 +39,10 @@ namespace PlayerScripts
         public static event PlayerAttackEvent OnPlayerAttackEvent;
         public static event PlayerAttackCancelledEvent OnPlayerAttackCancelledEvent;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             _playerControls = new PlayerControls();
             _playerRigidbody = GetComponent<Rigidbody2D>();
             _defaultMoveSpeed = moveSpeed;
@@ -48,11 +51,13 @@ namespace PlayerScripts
 
         private void OnEnable()
         {
-            _playerControls.Enable();
-            _playerControls.Attack.PrimaryAttack.started += HandlePrimaryAttack;
-            _playerControls.Attack.PrimaryAttack.canceled += HandlePrimaryAttackCancelled;
-            _playerControls.Movement.Dash.started += HandleDash;
-            EnemyHealth.OnEnemyDeath += HandleEnemyKilled;
+            if (_playerControls != null)
+            {
+                _playerControls.Enable();
+                _playerControls.Attack.PrimaryAttack.started += HandlePrimaryAttack;
+                _playerControls.Attack.PrimaryAttack.canceled += HandlePrimaryAttackCancelled;
+                _playerControls.Movement.Dash.started += HandleDash;
+            }
         }
 
         private void HandleDash(InputAction.CallbackContext obj)
@@ -78,16 +83,13 @@ namespace PlayerScripts
 
         private void OnDisable()
         {
-            _playerControls.Attack.PrimaryAttack.started -= HandlePrimaryAttack;
-            _playerControls.Attack.PrimaryAttack.canceled -= HandlePrimaryAttackCancelled;
-            _playerControls.Movement.Dash.started -= HandleDash;
-            EnemyHealth.OnEnemyDeath -= HandleEnemyKilled;
-            _playerControls.Disable();
-        }
-
-        private void HandleEnemyKilled(EnemyHealth enemyhealth)
-        {
-            Debug.Log($"{gameObject.name} Just Killed Enemy : {enemyhealth.name}");
+            if (_playerControls != null)
+            {
+                _playerControls.Attack.PrimaryAttack.started -= HandlePrimaryAttack;
+                _playerControls.Attack.PrimaryAttack.canceled -= HandlePrimaryAttackCancelled;
+                _playerControls.Movement.Dash.started -= HandleDash;
+                _playerControls.Disable();
+            }
         }
 
         private void Update()
@@ -111,8 +113,8 @@ namespace PlayerScripts
         /// </summary>
         private void ReadMousePosition()
         {
-            if (_isDashing) return; 
-            
+            if (_isDashing) return;
+
             var mousePosition = _playerControls.MousePosition.MousePosition.ReadValue<Vector2>();
             var playerScreenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
             var shouldFlip = mousePosition.x < playerScreenPoint.x;

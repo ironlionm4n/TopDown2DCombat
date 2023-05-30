@@ -7,9 +7,9 @@ namespace PlayerScripts
     {
         private Animator _playerAnimator;
         private SpriteRenderer _playerSpriteRenderer;
-        
+
         // static readonly field, only calculated one time when class is first used
-        private static readonly int MoveX = Animator.StringToHash("moveX"); 
+        private static readonly int MoveX = Animator.StringToHash("moveX");
         private static readonly int MoveY = Animator.StringToHash("moveY");
 
         private void Awake()
@@ -17,7 +17,7 @@ namespace PlayerScripts
             _playerAnimator = GetComponent<Animator>();
             _playerSpriteRenderer = GetComponent<SpriteRenderer>();
         }
-        
+
         private void OnEnable()
         {
             PlayerController.OnPlayerMoveEvent += SetMovementVector;
@@ -26,13 +26,19 @@ namespace PlayerScripts
 
         public void SetMovementVector(float moveX, float moveY)
         {
-            _playerAnimator.SetFloat(MoveX, moveX);
-            _playerAnimator.SetFloat(MoveY, moveY);
+            if (_playerAnimator != null)
+            {
+                _playerAnimator.SetFloat(MoveX, moveX);
+                _playerAnimator.SetFloat(MoveY, moveY);
+            }
         }
 
         private void HandleSpriteFlip(bool shouldFlip)
         {
-            _playerSpriteRenderer.flipX = shouldFlip;
+            if(_playerSpriteRenderer != null)
+            {
+                _playerSpriteRenderer.flipX = shouldFlip;
+            }
         }
     }
 }

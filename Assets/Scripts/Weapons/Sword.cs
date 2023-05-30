@@ -33,6 +33,13 @@ namespace Weapons
             
         }
 
+        private void OnDisable()
+        {
+            PlayerController.OnPlayerAttackEvent -= HandlePlayerAttack;
+            PlayerController.OnPlayerAttackCancelledEvent -= HandlePlayerAttackCancelled;
+            PlayerController.OnMouseMoveEventWithDirection -= MouseFollowWithOffset;
+        }
+
         private void Update()
         {
             if (_attackButtonDown && !_isAttacking) SwordAttack();
@@ -52,7 +59,10 @@ namespace Weapons
         {
             _isAttacking = true;
             _swordAnimator.SetTrigger((int)Attack);
-            weaponCollider.gameObject.SetActive(true);
+            if (weaponCollider != null)
+            {
+                weaponCollider.gameObject.SetActive(true);
+            }
             _slashGameObject = Instantiate(slashEffectPrefab, slashEffectSpawnLocation.position, Quaternion.identity);
             _slashGameObject.transform.SetParent(transform.parent);
         }
