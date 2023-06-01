@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3c5aa209e5e25240991dc92285d7ee0, type: 3}
-  m_Name: PlayerSword
+  m_Name: Bow
   m_EditorClassIdentifier: 
-  knockBackForce: 10
+  weaponPrefab: {fileID: 5963970710396278816, guid: 8e22fafe892fa2146868937b75a31018, type: 3}
+  weaponCooldown: 0.7
+  knockBackForce: 3
   weaponDamage: 1
