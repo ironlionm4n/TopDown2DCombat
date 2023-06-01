@@ -4,47 +4,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ActiveInventory : MonoBehaviour
+namespace Inventory
 {
-    private int _activeSlotIndexNumber = 0;
-
-    private PlayerControls _playerControls;
-
-    private void Awake()
+    
+    public class ActiveInventory : MonoBehaviour
     {
-        _playerControls = new PlayerControls();
-    }
+        private int _activeSlotIndexNumber = 0;
 
-    private void OnEnable()
-    {
-        _playerControls.Enable();
-        _playerControls.Inventory.Keyboard.performed += HandleInventoryKeyboard;
-    }
+        private PlayerControls _playerControls;
 
-    private void OnDisable()
-    {
-        _playerControls.Inventory.Keyboard.performed -= HandleInventoryKeyboard;
-    }
-
-    private void HandleInventoryKeyboard(InputAction.CallbackContext obj)
-    {
-        ToggleActiveSlot((int) obj.ReadValue<float>());
-    }
-
-    private void ToggleActiveSlot(int index)
-    {
-        ToggleActiveHighlight(index);
-    }
-
-    private void ToggleActiveHighlight(int index)
-    {
-        _activeSlotIndexNumber = index - 1;
-
-        foreach (Transform inventorySlot in transform)
+        private void Awake()
         {
-            inventorySlot.GetChild(0).gameObject.SetActive(false);
+            _playerControls = new PlayerControls();
         }
-        
-        transform.GetChild(_activeSlotIndexNumber).GetChild(0).gameObject.SetActive(true);
+
+        private void OnEnable()
+        {
+            _playerControls.Enable();
+            _playerControls.Inventory.Keyboard.performed += HandleInventoryKeyboard;
+        }
+
+        private void OnDisable()
+        {
+            _playerControls.Inventory.Keyboard.performed -= HandleInventoryKeyboard;
+        }
+
+        private void HandleInventoryKeyboard(InputAction.CallbackContext obj)
+        {
+            ToggleActiveSlot((int) obj.ReadValue<float>());
+        }
+
+        private void ToggleActiveSlot(int index)
+        {
+            ToggleActiveHighlight(index);
+        }
+
+        private void ToggleActiveHighlight(int index)
+        {
+            _activeSlotIndexNumber = index - 1;
+
+            foreach (Transform inventorySlot in transform)
+            {
+                inventorySlot.GetChild(0).gameObject.SetActive(false);
+            }
+            
+            transform.GetChild(_activeSlotIndexNumber).GetChild(0).gameObject.SetActive(true);
+        }
     }
 }
