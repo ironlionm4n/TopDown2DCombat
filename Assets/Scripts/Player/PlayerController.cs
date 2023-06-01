@@ -12,6 +12,11 @@ namespace PlayerScripts
         [SerializeField] private float dashTime;
         [SerializeField] private TrailRenderer playerTrailRenderer;
         [SerializeField] private float dashCooldown;
+        [SerializeField] private Transform weaponCollider;
+        public Transform WeaponCollider => weaponCollider;
+        
+        [SerializeField] private Transform slashEffectSpawnLocation;
+        public Transform SlashEffectSpawnLocation => weaponCollider;
 
         private PlayerControls _playerControls;
         private Vector2 _movementDirection;

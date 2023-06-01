@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using PlayerScripts;
 using UnityEngine.InputSystem;
@@ -6,92 +7,59 @@ using Weapons;
 
 namespace Inventory
 {
-    public class Sword : MonoBehaviour
+    public class Sword : MonoBehaviour, IWeapon
     {
         [SerializeField] private GameObject slashEffectPrefab;
-        [SerializeField] private Transform slashEffectSpawnLocation;
-        [SerializeField] private Transform weaponCollider;
-        [SerializeField] private float swordAttackCooldown;
-
+        [SerializeField] private PlayerWeaponScriptableObjects weaponInfo;
+        
         private Animator _swordAnimator;
-        private static readonly int Attack = Animator.StringToHash("Attack");
-        private ActiveWeapon _activeWeapon;
+        private static readonly int AttackHash = Animator.StringToHash("Attack");
         private GameObject _slashGameObject;
-        private bool _attackButtonDown, _isAttacking;
+        private Transform _weaponColliderTransform;
 
         private void Awake()
         {
             _swordAnimator = GetComponent<Animator>();
-            _activeWeapon = GetComponentInParent<ActiveWeapon>();
         }
 
-        private void OnEnable()
+        private void Start()
         {
-            PlayerController.OnPlayerAttackEvent += HandlePlayerAttack;
-            PlayerController.OnPlayerAttackCancelledEvent += HandlePlayerAttackCancelled;
+            _weaponColliderTransform = PlayerController.Instance.WeaponCollider;
             PlayerController.OnMouseMoveEventWithDirection += MouseFollowWithOffset;
-            
         }
 
         private void OnDisable()
         {
-            PlayerController.OnPlayerAttackEvent -= HandlePlayerAttack;
-            PlayerController.OnPlayerAttackCancelledEvent -= HandlePlayerAttackCancelled;
             PlayerController.OnMouseMoveEventWithDirection -= MouseFollowWithOffset;
         }
 
-        private void Update()
+        public void Attack()
         {
-            if (_attackButtonDown && !_isAttacking) SwordAttack();
-        }
-
-        private void HandlePlayerAttackCancelled(InputAction.CallbackContext context)
-        {
-            if (context.canceled) _attackButtonDown = false;
-        }
-
-        private void HandlePlayerAttack(InputAction.CallbackContext context, Transform playerTransform)
-        {
-            _attackButtonDown = true;
-        }
-
-        private void SwordAttack()
-        {
-            _isAttacking = true;
-            _swordAnimator.SetTrigger((int)Attack);
-            if (weaponCollider != null)
-            {
-                weaponCollider.gameObject.SetActive(true);
-            }
-            _slashGameObject = Instantiate(slashEffectPrefab, slashEffectSpawnLocation.position, Quaternion.identity);
+            _swordAnimator.SetTrigger((int)AttackHash);
+            _weaponColliderTransform.gameObject.SetActive(true);
+            _slashGameObject = Instantiate(slashEffectPrefab, PlayerController.Instance.SlashEffectSpawnLocation.position, Quaternion.identity);
             _slashGameObject.transform.SetParent(transform.parent);
-        }
-
-        public void SetIsAttackingFalseAnimationEvent()
-        {
-            StartCoroutine(SwordAttackCDRoutine());
-        }
-
-        private IEnumerator SwordAttackCDRoutine()
-        {
-            yield return new WaitForSeconds(swordAttackCooldown);
-            _isAttacking = false;
         }
 
         public void DisableWeaponColliderAnimationEvent()
         {
-            weaponCollider.gameObject.SetActive(false);
+            _weaponColliderTransform.gameObject.SetActive(false);
+        }
+
+        public PlayerWeaponScriptableObjects GetWeaponInfo()
+        {
+            return weaponInfo;
         }
 
         private void MouseFollowWithOffset(bool shouldFlip, float moveX, float moveY)
         {
             var angle = Mathf.Atan2(moveY, moveX) * Mathf.Rad2Deg;
             slashEffectPrefab.GetComponent<SpriteRenderer>().flipX = shouldFlip;
-            weaponCollider.rotation = Quaternion.Euler(0, shouldFlip ? 180 : 0, 0);
+            _weaponColliderTransform.rotation = Quaternion.Euler(0, shouldFlip ? 180 : 0, 0);
             if (shouldFlip)
-                _activeWeapon.transform.rotation = Quaternion.Euler(0, -180, angle);
+                ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, -180, angle);
             else
-                _activeWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+                ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, angle);
         }
 
         public void SwingUpFlipAnimationEvent()
@@ -99,4 +67,5 @@ namespace Inventory
             _slashGameObject.transform.rotation = Quaternion.Euler(-180, 0, 0);
         }
     }
+    
 }
