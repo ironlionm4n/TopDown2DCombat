@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using PlayerScripts;
 using UnityEngine.InputSystem;
+using Weapons;
 
-namespace Weapons
+namespace Inventory
 {
     public class Sword : MonoBehaviour
     {
