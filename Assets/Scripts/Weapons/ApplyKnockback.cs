@@ -17,7 +17,6 @@ namespace Weapons
             var force = (Vector2) (transform.position - damageSource.position).normalized
                         * (knockBackThrust * _rigidbody2D.mass);
 
-            Debug.Log(force);
             _rigidbody2D.AddForce(force, ForceMode2D.Impulse);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using PlayerScripts;
+using Unity.Mathematics;
 using UnityEngine;
 using Weapons;
 
@@ -8,7 +9,17 @@ namespace Inventory
     public class Staff : MonoBehaviour, IWeapon
     {
         [SerializeField] private PlayerWeaponScriptableObjects weaponInfo;
-        
+        [SerializeField] private GameObject magicLaser;
+        [SerializeField] private Transform magicLaserSpawnPoint;
+
+        private Animator _staffAnimator;
+        private static readonly int AttackHash = Animator.StringToHash("Attack");
+
+        private void Awake()
+        {
+            _staffAnimator = GetComponent<Animator>();
+        }
+
         private void OnEnable()
         {
             PlayerController.OnMouseMoveEventWithDirection += MouseFollowWithOffset;
@@ -16,7 +27,13 @@ namespace Inventory
 
         public void Attack()
         {
-            Debug.Log("Staff Attack");
+            _staffAnimator.SetTrigger(AttackHash);
+        }
+
+        public void SpawnStaffProjectileAnimationEvent()
+        {
+            Debug.Log("Hello?");
+            Instantiate(magicLaser, magicLaserSpawnPoint.position, quaternion.identity);
         }
         
         public PlayerWeaponScriptableObjects GetWeaponInfo()

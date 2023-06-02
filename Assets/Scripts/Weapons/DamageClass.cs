@@ -1,20 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Inventory;
 using UnityEngine;
+using Weapons;
 
 public class DamageClass : MonoBehaviour
 {
-    [SerializeField] private PlayerWeaponScriptableObjects swordWeaponScriptableObject;
-    public delegate void EnemyWasHitWithDamage(PlayerWeaponScriptableObjects swordWeaponScriptableObject, EnemyHealth enemyHealth);
 
-    public static event EnemyWasHitWithDamage OnEnemyWasHitWithDamage;
+    private PlayerWeaponScriptableObjects _currentActiveWeapon;
     
+
+    private void Start()
+    {
+        _currentActiveWeapon = (ActiveWeapon.Instance.CurrentActiveWeapon as IWeapon).GetWeaponInfo();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.TryGetComponent<EnemyHealth>(out var enemyHealth))
         {
-            OnEnemyWasHitWithDamage?.Invoke(swordWeaponScriptableObject, enemyHealth);
+            enemyHealth.TakeDamage(_currentActiveWeapon);
         }
     }
 }

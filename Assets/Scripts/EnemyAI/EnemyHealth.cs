@@ -37,22 +37,11 @@ public class EnemyHealth : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.OnPlayerAttackEvent += HandleOnPlayerAttack;
-        DamageClass.OnEnemyWasHitWithDamage += HandleTakeDamage;
     }
 
     private void OnDisable()
     {
         PlayerController.OnPlayerAttackEvent -= HandleOnPlayerAttack;
-        DamageClass.OnEnemyWasHitWithDamage -= HandleTakeDamage;
-    }
-
-    private void HandleTakeDamage(PlayerWeaponScriptableObjects weaponSO, EnemyHealth enemyHealth)
-    {
-        if (enemyHealth.gameObject != gameObject)
-        {
-            return;
-        }
-        TakeDamage(weaponSO);
     }
 
     private void HandleOnPlayerAttack(InputAction.CallbackContext context, Transform playerTransform)
