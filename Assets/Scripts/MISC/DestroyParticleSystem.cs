@@ -17,7 +17,6 @@ namespace MISC
         // Update is called once per frame
         private void Update()
         {
-            Debug.Log(_particleSystem.IsAlive());
             if (_particleSystem && !_particleSystem.IsAlive())
             {
                 Destroy(gameObject);

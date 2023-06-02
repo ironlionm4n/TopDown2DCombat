@@ -50418,7 +50418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99897c79ecb840b4195f696987e10379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordWeaponScriptableObject: {fileID: 11400000, guid: 7126ef87d9f5c314ab10d453ae899377, type: 2}
 --- !u!1 &2106610429
 GameObject:
   m_ObjectHideFlags: 0
