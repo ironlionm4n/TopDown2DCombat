@@ -14,7 +14,7 @@ namespace Inventory
         private int _activeSlotIndexNumber = 0;
         private PlayerControls _playerControls;
         
-        private void Awake()
+        protected override void Awake()
         {
             base.Awake();
             _playerControls = new PlayerControls();
