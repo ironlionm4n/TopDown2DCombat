@@ -9,7 +9,7 @@ public class Destructible : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<DamageClass>())
+        if (other.GetComponent<DamageClass>() || other.GetComponent<Projectile>())
         {
             Instantiate(destroyVFX, transform.position, Quaternion.identity);
             Destroy(gameObject);

@@ -14,10 +14,6 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private Material damageMaterial;
     [SerializeField] private float hitFlashTime;
 
-    public delegate void EnemyDeathHandler(EnemyHealth enemyHealth);
-
-    public static event EnemyDeathHandler OnEnemyDeath;
-
     private int _currentHealth;
     private ApplyKnockback _knockback;
     private EnemyPathfinding _enemyPathfinding;
@@ -64,10 +60,8 @@ public class EnemyHealth : MonoBehaviour
         _playerTransform = playerTransform;
     }
 
-    private void TakeDamage(PlayerWeaponScriptableObjects weaponSO)
+    public void TakeDamage(PlayerWeaponScriptableObjects weaponSO)
     {
-
-        
         _enemyPathfinding.SetShouldMove(false);
         _currentHealth -= weaponSO.WeaponDamage;
         StartCoroutine(FlashDamageSpriteColor());
