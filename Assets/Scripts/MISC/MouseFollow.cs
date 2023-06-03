@@ -6,17 +6,17 @@ using UnityEngine;
 
 public class MouseFollow : MonoBehaviour
 {
-    private void OnEnable()
-    {
-        PlayerController.OnMouseMoveEventWithDirection += FaceMouse;
+    private void Update() {
+        FaceMouse();
     }
 
-    private void FaceMouse(bool flipx, float movex, float movey)
-    {
-        var mousePosition = new Vector3(movex, movey, 0);
-        var mousePositionWorldPoint = Camera.main.ScreenToWorldPoint(mousePosition);
+    private void FaceMouse() {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        var direction = (Vector2) transform.position - (Vector2) mousePositionWorldPoint;
+        Vector2 direction = transform.position - mousePosition;
+
         transform.right = -direction;
     }
+
 }

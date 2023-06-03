@@ -19,11 +19,6 @@ namespace Weapons
         private bool _attackButtonDown, _isAttacking;
         private float _coolDownTime;
 
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
         private void Start()
         {
             StartCoroutine(TimeBetweenAttacks());
