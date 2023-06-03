@@ -25,6 +25,11 @@ namespace Inventory
             PlayerController.OnMouseMoveEventWithDirection += MouseFollowWithOffset;
         }
 
+        private void OnDisable()
+        {
+            PlayerController.OnMouseMoveEventWithDirection -= MouseFollowWithOffset;
+        }
+
         public void Attack()
         {
             _staffAnimator.SetTrigger(AttackHash);
@@ -32,8 +37,11 @@ namespace Inventory
 
         public void SpawnStaffProjectileAnimationEvent()
         {
-            Debug.Log("Hello?");
-            Instantiate(magicLaser, magicLaserSpawnPoint.position, quaternion.identity);
+            var laser = Instantiate(magicLaser, magicLaserSpawnPoint.position, quaternion.identity);
+            if (laser.TryGetComponent<MagicLaser>(out var mag))
+            {
+                mag.UpdateLaserRange(weaponInfo.WeaponRange);
+            }
         }
         
         public PlayerWeaponScriptableObjects GetWeaponInfo()

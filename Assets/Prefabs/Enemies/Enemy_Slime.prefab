@@ -100,6 +100,9 @@ GameObject:
   - component: {fileID: 4750609161486090049}
   - component: {fileID: 4750609161486090051}
   - component: {fileID: 4750609161486090050}
+  - component: {fileID: 930914378}
+  - component: {fileID: 614670321096977067}
+  - component: {fileID: 930914380}
   m_Layer: 0
   m_Name: Enemy_Slime
   m_TagString: Untagged
@@ -164,7 +167,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1196546774, guid: b0971d7c3df0bf248915cdae722bc11f, type: 3}
+  m_Sprite: {fileID: 723197681, guid: 2b3d6cba4fe8c5d499db1e66598dd520, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -267,3 +270,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d554e9e84e644746ac0cee11e21f97f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &930914378
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4750609161486090058}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fe5490020daf1984891a78b797b875e5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &614670321096977067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4750609161486090058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8994fe4c67959646af0b5f3f2bc3f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!210 &930914380
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4750609161486090058}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
