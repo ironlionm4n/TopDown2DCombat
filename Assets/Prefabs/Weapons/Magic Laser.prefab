@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!70 &3804816084228634813
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0160436, y: 0.048131652}
+  m_Offset: {x: 0.5, y: 0}
   m_Size: {x: 0.8074757, y: 0.42242634}
   m_Direction: 1
 --- !u!50 &3804816084228634814
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b329755c90be154abd5f8572b03f0d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserGrowTime: 2
 --- !u!114 &3582762140494195061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,4 +150,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99897c79ecb840b4195f696987e10379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordWeaponScriptableObject: {fileID: 0}
