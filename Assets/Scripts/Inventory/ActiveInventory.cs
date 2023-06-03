@@ -33,7 +33,11 @@ namespace Inventory
 
         private void OnDisable()
         {
-            _playerControls.Inventory.Keyboard.performed -= HandleInventoryKeyboard;
+            if (_playerControls != null)
+            {
+                _playerControls.Inventory.Keyboard.performed -= HandleInventoryKeyboard;
+                
+            }
         }
 
         private void HandleInventoryKeyboard(InputAction.CallbackContext obj)

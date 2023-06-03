@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -8,7 +9,12 @@ using UnityEngine;
 public class CameraController : Singleton<CameraController>
 {
     private CinemachineVirtualCamera _cinemachineVirtualCamera;
-    
+
+    private void Start()
+    {
+        SetPlayerAsCameraFollowTarget();
+    }
+
     public void SetPlayerAsCameraFollowTarget()
     {
         _cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
