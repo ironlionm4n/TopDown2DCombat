@@ -8,10 +8,12 @@ public class EnemyPathfinding : MonoBehaviour
     
     private Rigidbody2D _enemyRigidbody2D;
     private Vector2 _moveDirection;
+    private SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
         _enemyRigidbody2D = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -25,6 +27,7 @@ public class EnemyPathfinding : MonoBehaviour
     public void SetMoveDirection(Vector2 moveDirection)
     {
         _moveDirection = moveDirection;
+        _spriteRenderer.flipX = _moveDirection.x < 0;
     }
 
     public void SetShouldMove(bool shouldMove)
