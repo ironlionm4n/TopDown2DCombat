@@ -7,8 +7,10 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private float flySpeed;
     [SerializeField] private GameObject projectileVFX;
-
-    private PlayerWeaponScriptableObjects _weaponScriptableObjects;
+    [SerializeField] private float projectileRange = 10f;
+    [SerializeField] private bool isEnemyProjectile;
+    public bool IsEnemyProjectile => isEnemyProjectile;
+    
     private Vector3 _startPosition;
 
     private void Start()
@@ -26,8 +28,13 @@ public class Projectile : MonoBehaviour
     {
         var enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
         var indestructible = other.GetComponent<Indestructible>();
-        if (!other.isTrigger && (enemyHealth || indestructible))
+        var playerHealth = other.GetComponent<PlayerHealth>();
+        if (!other.isTrigger && (enemyHealth || indestructible || playerHealth))
         {
+            if (playerHealth && isEnemyProjectile)
+            {
+                playerHealth.TakeDamage(1, transform);
+            }
             Instantiate(projectileVFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
@@ -35,15 +42,15 @@ public class Projectile : MonoBehaviour
 
     private void DetectFireDistance()
     {
-        if (Vector3.Distance(transform.position, _startPosition) > _weaponScriptableObjects.WeaponRange)
+        if (Vector3.Distance(transform.position, _startPosition) > projectileRange)
         {
             Destroy(gameObject);
         }
     }
 
-    public void UpdateWeaponInfo(PlayerWeaponScriptableObjects playerWeaponScriptableObjects)
+    public void UpdateProjectileRange(float projectileRange)
     {
-        _weaponScriptableObjects = playerWeaponScriptableObjects;
+        this.projectileRange = projectileRange;
     }
 
     private void MoveProjectile()
