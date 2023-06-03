@@ -45,6 +45,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 2800000, guid: ac04aa6c25c95f54f880ee425c668fd2, type: 3}
+    - {fileID: 2800000, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -136,6 +137,39 @@ SpriteAtlas:
   - {fileID: -1725271938, guid: ac04aa6c25c95f54f880ee425c668fd2, type: 3}
   - {fileID: 1453558336, guid: ac04aa6c25c95f54f880ee425c668fd2, type: 3}
   - {fileID: -1796251388, guid: ac04aa6c25c95f54f880ee425c668fd2, type: 3}
+  - {fileID: -1238679483, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -2124042204, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -856731665, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 978329711, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 1510437502, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -1930848069, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -2127799878, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -65032665, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -677092127, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -223034142, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 1482472693, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -1913829470, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -1524676748, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -409289014, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 2023625379, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -2059555338, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 336380350, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -329853726, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 1790683201, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -885186330, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 1686352309, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 550323386, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -11748679, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -1513705981, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 326770601, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -1718832547, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 1361232580, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -1931314224, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -1460380517, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: -1491411542, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 1651129385, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 1286373230, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
+  - {fileID: 530061084, guid: bb84d0ae20ce58346b1201193be2dbda, type: 3}
   m_PackedSpriteNamesToIndex:
   - Outdoor Tile Spritesheet_59
   - Outdoor Tile Spritesheet_58
@@ -223,6 +257,39 @@ SpriteAtlas:
   - Outdoor Tile Spritesheet_81
   - Outdoor Tile Spritesheet_84
   - Outdoor Tile Spritesheet_85
+  - Animated Water Tiles_30
+  - Animated Water Tiles_31
+  - Animated Water Tiles_32
+  - Animated Water Tiles_12
+  - Animated Water Tiles_13
+  - Animated Water Tiles_10
+  - Animated Water Tiles_11
+  - Animated Water Tiles_16
+  - Animated Water Tiles_17
+  - Animated Water Tiles_14
+  - Animated Water Tiles_15
+  - Animated Water Tiles_18
+  - Animated Water Tiles_19
+  - Animated Water Tiles_7
+  - Animated Water Tiles_6
+  - Animated Water Tiles_5
+  - Animated Water Tiles_4
+  - Animated Water Tiles_29
+  - Animated Water Tiles_3
+  - Animated Water Tiles_28
+  - Animated Water Tiles_2
+  - Animated Water Tiles_27
+  - Animated Water Tiles_1
+  - Animated Water Tiles_26
+  - Animated Water Tiles_0
+  - Animated Water Tiles_25
+  - Animated Water Tiles_24
+  - Animated Water Tiles_23
+  - Animated Water Tiles_22
+  - Animated Water Tiles_21
+  - Animated Water Tiles_20
+  - Animated Water Tiles_9
+  - Animated Water Tiles_8
   m_RenderDataMap: {}
   m_Tag: TilemapSpriteAtlas
   m_IsVariant: 0

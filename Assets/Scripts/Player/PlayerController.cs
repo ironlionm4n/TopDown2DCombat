@@ -2,6 +2,7 @@ using System.Collections;
 using MISC;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Weapons;
 
 namespace PlayerScripts
 {
@@ -25,6 +26,7 @@ namespace PlayerScripts
         private bool _isDashing;
         private bool _canDash = true;
         private float _defaultMoveSpeed, _dashMoveSpeed;
+        private ApplyKnockback _knockback;
 
 
         public delegate void PlayerEvent(float moveX, float moveY);
@@ -52,6 +54,7 @@ namespace PlayerScripts
             _playerRigidbody = GetComponent<Rigidbody2D>();
             _defaultMoveSpeed = moveSpeed;
             _dashMoveSpeed = _defaultMoveSpeed * dashMultiplier;
+            _knockback = GetComponent<ApplyKnockback>();
         }
 
         private void OnEnable()
@@ -129,6 +132,8 @@ namespace PlayerScripts
 
         private void MovePlayer()
         {
+            if (_knockback.GettingKnockedBack) return;
+            
             _playerRigidbody.MovePosition(_playerRigidbody.position +
                                           _movementDirection * (moveSpeed * Time.deltaTime));
 
