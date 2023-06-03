@@ -24,7 +24,7 @@ namespace Inventory
             _bowAnimator.SetTrigger(LaunchHash);
             var arrowSpawn = Instantiate(arrowPrefab, arrowSpawnPoint.position,
                 ActiveWeapon.Instance.transform.rotation);
-            arrowSpawn.GetComponent<Projectile>().UpdateWeaponInfo(weaponInfo);
+            arrowSpawn.GetComponent<Projectile>().UpdateProjectileRange(weaponInfo.WeaponRange);
         }
 
         public PlayerWeaponScriptableObjects GetWeaponInfo()
