@@ -38,4 +38,9 @@ public class EnemyPathfinding : MonoBehaviour
         }
         this.shouldMove = shouldMove;
     }
+
+    public void StopMoving()
+    {
+        _moveDirection = Vector3.zero;
+    }
 }

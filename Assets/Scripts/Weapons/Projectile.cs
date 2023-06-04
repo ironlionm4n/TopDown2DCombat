@@ -31,12 +31,17 @@ public class Projectile : MonoBehaviour
         var playerHealth = other.GetComponent<PlayerHealth>();
         if (!other.isTrigger && (enemyHealth || indestructible || playerHealth))
         {
-            if (playerHealth && isEnemyProjectile)
+            if ((playerHealth && isEnemyProjectile) || (enemyHealth && !isEnemyProjectile))
             {
-                playerHealth.TakeDamage(1, transform);
+                playerHealth?.TakeDamage(1, transform);
+                Instantiate(projectileVFX, transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
-            Instantiate(projectileVFX, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            else if(!other.isTrigger && indestructible)
+            {
+                Instantiate(projectileVFX, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -51,6 +56,11 @@ public class Projectile : MonoBehaviour
     public void UpdateProjectileRange(float projectileRange)
     {
         this.projectileRange = projectileRange;
+    }
+
+    public void UpdateMoveSpeed(float moveSpeed)
+    {
+        flySpeed = moveSpeed;
     }
 
     private void MoveProjectile()

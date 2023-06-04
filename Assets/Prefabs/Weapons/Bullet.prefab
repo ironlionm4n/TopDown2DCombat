@@ -102,7 +102,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0198a927e2398994ba059da4adc2a164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flySpeed: 0.5
+  flySpeed: 5
   projectileVFX: {fileID: 174992310799525528, guid: 7c3c6c9035435bb46be3dedcaf1d9169, type: 3}
-  projectileRange: 10
+  projectileRange: 15
   isEnemyProjectile: 1
