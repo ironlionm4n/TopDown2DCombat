@@ -25,6 +25,5 @@ namespace MISC
             yield return new WaitForSeconds(restoreDefaultMatTime);
             spriteRenderer.material = defaultMat;
         }
-
     }
 }
