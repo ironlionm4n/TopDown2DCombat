@@ -32,24 +32,22 @@ public class PlayerHealth : MonoBehaviour
     {
         
         var enemyAi = other.gameObject.GetComponent<EnemyAI>();
-        var projectile = other.gameObject.GetComponent<Projectile>();
         
-        if (enemyAi == null) return;
-        
-        if (enemyAi || projectile.IsEnemyProjectile)
+        if (enemyAi)
         {
             TakeDamage(1, other.transform);
-            StartCoroutine(_flash.FlashRoutine());
         }
     }
 
     public void TakeDamage(int damage, Transform hitTransform)
     {
         if (!_canTakeDamage) return;
+        
+        ScreenShakeManager.Instance.ShakeScreen();
+        _knockback.GetKnockedBack(hitTransform.transform, knockBackThrustAmount);
+        StartCoroutine(_flash.FlashRoutine());
         _canTakeDamage = false;
         _currentHealth -= damage;
-        _knockback.GetKnockedBack(hitTransform.transform, knockBackThrustAmount);
-        Debug.Log(_currentHealth);
         StartCoroutine(ResetCanTakeDamageRoutine());
     }
 
