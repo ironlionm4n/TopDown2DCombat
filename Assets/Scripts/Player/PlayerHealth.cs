@@ -30,8 +30,12 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
+        
         var enemyAi = other.gameObject.GetComponent<EnemyAI>();
         var projectile = other.gameObject.GetComponent<Projectile>();
+        
+        if (enemyAi == null) return;
+        
         if (enemyAi || projectile.IsEnemyProjectile)
         {
             TakeDamage(1, other.transform);
