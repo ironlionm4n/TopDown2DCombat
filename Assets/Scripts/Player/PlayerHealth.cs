@@ -5,7 +5,7 @@ using Weapons;
 using MISC;
 using UnityEngine.Serialization;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : Singleton<PlayerHealth>
 {
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float knockBackThrustAmount;
@@ -16,8 +16,9 @@ public class PlayerHealth : MonoBehaviour
     private Flash _flash;
     private bool _canTakeDamage;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _knockback = GetComponent<ApplyKnockback>();
         _flash = GetComponent<Flash>();
         _canTakeDamage = true;
@@ -37,6 +38,11 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(1, other.transform);
         }
+    }
+
+    public void HealPlayer()
+    {
+        _currentHealth += 1;
     }
 
     public void TakeDamage(int damage, Transform hitTransform)
