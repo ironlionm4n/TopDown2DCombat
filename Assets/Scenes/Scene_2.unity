@@ -1315,6 +1315,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5020877073120430701, guid: 8e72699f2a472c44cad3f1cf7214e396, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.3582687
+      objectReference: {fileID: 0}
+    - target: {fileID: 5020877073120430701, guid: 8e72699f2a472c44cad3f1cf7214e396, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.626758
+      objectReference: {fileID: 0}
     - target: {fileID: 5020877073390608804, guid: 8e72699f2a472c44cad3f1cf7214e396, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1503,7 +1511,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1530156178
 Transform:
   m_ObjectHideFlags: 0
@@ -1723,10 +1731,6 @@ PrefabInstance:
     - target: {fileID: 7732010734300369044, guid: 26f1a2753f001eb4f89a42ff5f468dc1, type: 3}
       propertyPath: m_Name
       value: UI_Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7732010734300369044, guid: 26f1a2753f001eb4f89a42ff5f468dc1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7732010734338800938, guid: 26f1a2753f001eb4f89a42ff5f468dc1, type: 3}
       propertyPath: m_AnchorMax.y
