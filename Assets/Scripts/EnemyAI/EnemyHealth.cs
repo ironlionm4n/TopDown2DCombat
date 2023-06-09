@@ -85,6 +85,7 @@ public class EnemyHealth : MonoBehaviour
     private void DestroySelf()
     {
         Instantiate(deathParticleSystem, transform.position, Quaternion.identity);
+        GetComponent<PickupSpawner>().SpawnPickup();
         Destroy(gameObject);
     }
 }

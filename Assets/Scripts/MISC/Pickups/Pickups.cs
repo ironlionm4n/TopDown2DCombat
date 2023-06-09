@@ -90,7 +90,7 @@ public class Pickups : MonoBehaviour
         {
             case PickupTypes.GoldCoin:
             {
-                Debug.Log("Gold Coin");
+                EconomyManager.Instance.UpdateCurrentGold();
                 break;
             }
             case PickupTypes.HealthGlobe:
@@ -100,7 +100,7 @@ public class Pickups : MonoBehaviour
             }
             case PickupTypes.StaminaGlobe:
             {
-                Debug.Log("Stamina Globe");
+                Stamina.Instance.RefreshStamina();
                 break;
             }
         }
