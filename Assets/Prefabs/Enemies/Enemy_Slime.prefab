@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 930914378}
   - component: {fileID: 614670321096977067}
   - component: {fileID: 930914380}
+  - component: {fileID: -6451822690610457461}
   m_Layer: 0
   m_Name: Enemy_Slime
   m_TagString: Untagged
@@ -228,6 +229,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDelay: 1.33
+  attackRange: 0
+  enemyType: {fileID: 0}
+  attackCooldown: 0
+  movesWhileAttacking: 0
 --- !u!114 &4750609161486090049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d554e9e84e644746ac0cee11e21f97f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockBackTime: 0
 --- !u!95 &930914378
 Animator:
   serializedVersion: 5
@@ -314,3 +320,18 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-6451822690610457461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4750609161486090058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8bd8da5a55cf894c9f1f19930f4f945, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldCoin: {fileID: 4554832807318688572, guid: f3fc9ca2e50a8f5429bf260aa5ef3713, type: 3}
+  healthGlobe: {fileID: 4554832807318688572, guid: 2186c710a234b224c869291385a6d198, type: 3}
+  staminaGlobe: {fileID: 4554832807318688572, guid: cf83ce2b9dc095244b2e3d287b11edb9, type: 3}

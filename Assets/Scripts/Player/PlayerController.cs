@@ -70,8 +70,9 @@ namespace PlayerScripts
 
         private void HandleDash(InputAction.CallbackContext obj)
         {
-            if (!_canDash) return;
+            if (!_canDash || Stamina.Instance.CurrentStamina <= 0) return;
 
+            Stamina.Instance.UseStamina();
             _canDash = false;
             _isDashing = true;
             moveSpeed = _dashMoveSpeed;
