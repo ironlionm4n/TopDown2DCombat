@@ -34,7 +34,7 @@ Transform:
   - {fileID: 5505146674560300325}
   - {fileID: 5505146674187442957}
   m_Father: {fileID: 5505146674677853612}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5505146674162609062
 SpriteRenderer:
@@ -465,8 +465,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5505146675871972893}
   - {fileID: 5505146674162609057}
+  - {fileID: 5505146675871972893}
   - {fileID: 5505146674554182849}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -592,6 +592,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62a519d64de6644cac7597e46e52014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fullStaminaSprite: {fileID: 0}
+  emptyStaminaImage: {fileID: 0}
+  timeBetweenStaminaRefresh: 0
 --- !u!1 &5505146675336747135
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +658,7 @@ Transform:
   m_Children:
   - {fileID: 5505146675336747134}
   m_Father: {fileID: 5505146674677853612}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5505146675871972892
 MonoBehaviour:
