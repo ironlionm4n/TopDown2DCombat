@@ -3,11 +3,13 @@ using System.Collections;
 using UnityEngine;
 using Weapons;
 using MISC;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerHealth : Singleton<PlayerHealth>
 {
+    public bool IsDead { get; private set; }
     private const string HEALTH_SLIDER = "Health Slider";
     
     [SerializeField] private int maxHealth = 3;
@@ -19,6 +21,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
     private ApplyKnockback _knockback;
     private Flash _flash;
     private bool _canTakeDamage;
+    private static readonly int Death = Animator.StringToHash("Death");
 
     protected override void Awake()
     {
@@ -33,6 +36,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
     {
         _currentHealth = maxHealth;
         UpdateHealthSlider();
+        IsDead = false;
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -82,8 +86,25 @@ public class PlayerHealth : Singleton<PlayerHealth>
         _healthSlider.value = _currentHealth;
     }
 
+    private IEnumerator DeathLoadRoutine()
+    {
+        yield return new WaitForSeconds(2);
+        Destroy(gameObject);
+        Stamina.Instance.RefreshStaminaOnDeath();
+        SceneManager.LoadScene("Scene_Town");
+    }
+    
     private void CheckForPlayerDeath()
     {
-        if (_currentHealth <= 0) _currentHealth = 0;
+        if (_currentHealth <= 0)
+        {
+            _currentHealth = 0;
+            IsDead = true;
+            Destroy(ActiveWeapon.Instance.gameObject);
+            var correctAnimator = GetComponentInChildren<Animator>();
+            Debug.Log(correctAnimator.name);
+            GetComponentInChildren<Animator>().SetTrigger(Death);
+            StartCoroutine(DeathLoadRoutine());
+        }
     }
 }

@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Inventory;
 using MISC;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -55,6 +57,12 @@ namespace PlayerScripts
             _defaultMoveSpeed = moveSpeed;
             _dashMoveSpeed = _defaultMoveSpeed * dashMultiplier;
             _knockback = GetComponent<ApplyKnockback>();
+        }
+
+
+        private void Start()
+        {
+            ActiveInventory.Instance.EquipStartingWeapon();
         }
 
         private void OnEnable()
@@ -133,7 +141,7 @@ namespace PlayerScripts
 
         private void MovePlayer()
         {
-            if (_knockback.GettingKnockedBack) return;
+            if (_knockback.GettingKnockedBack || PlayerHealth.Instance.IsDead) return;
             
             _playerRigidbody.MovePosition(_playerRigidbody.position +
                                           _movementDirection * (moveSpeed * Time.deltaTime));

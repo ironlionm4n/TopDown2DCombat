@@ -40,6 +40,11 @@ namespace Inventory
             }
         }
 
+        public void EquipStartingWeapon()
+        {
+            ToggleActiveHighlight(1);
+        }
+
         private void HandleInventoryKeyboard(InputAction.CallbackContext obj)
         {
             ToggleActiveSlot((int)obj.ReadValue<float>());
@@ -62,6 +67,11 @@ namespace Inventory
 
         private void ChangeActiveWeapon()
         {
+            if (PlayerHealth.Instance.IsDead)
+            {
+                return;
+            }
+            
             if (ActiveWeapon.Instance.CurrentActiveWeapon != null)
             {
                 Destroy(ActiveWeapon.Instance.CurrentActiveWeapon.gameObject);
